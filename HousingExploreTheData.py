@@ -96,7 +96,7 @@ housing["income_cat"] = pd.cut(housing["median_income"], bins=[0., 1.5, 3.0, 4.5
 
 #print(housing["income_cat"])
 
-housing["income_cat"].hist()
+#housing["income_cat"].hist()
 #plt.show()
 
 split = StratifiedShuffleSplit(n_splits=1, test_size=.2, random_state=42)
@@ -110,3 +110,15 @@ print(strat_test_set["income_cat"].value_counts() / len(strat_test_set))
 for set_ in (strat_train_set, strat_test_set):
     set_.drop("income_cat", axis=1, inplace=True)
 
+# from page 56
+
+housing = strat_train_set.copy()
+#housing.plot(kind="scatter", x="longitude", y="latitude", alpha=.1)
+#housing.plot(kind="scatter", x="longitude", y="latitude", alpha=.4,
+#             s=housing["population"]/100, label="population", figsize=(10, 7),
+#             c="median_house_value", cmap=plt.get_cmap("jet"), colorbar=True)
+#plt.legend()
+#plt.show()
+
+corr_matrix = housing.corr()
+print(corr_matrix["median_house_value"].sort_values(ascending=False))
